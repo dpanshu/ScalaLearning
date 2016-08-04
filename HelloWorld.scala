@@ -46,6 +46,10 @@ var equalityBoolean = capString==dropString
 var upperString = dropString.toUpperCase
 var lowerString = s.toLowerCase
 
+// convert character to upper or lower
+var upperChar = 'a'.toUpper
+var lowerChar = 'A'.toLower
+
 // ignore the cases and check if 2 strings are equal
 var equalityIgnoreCaseBoolean = dropString.equalsIgnoreCase(getString)
 
@@ -103,5 +107,57 @@ var deepGupta = Student("Deepanshu", 21, 200.00)
 println(s"${deepGupta.name} is ${deepGupta.age} old")
 var newStringVarInString = s"${deepGupta.name} is ${deepGupta.age} old"
 
-// printf style string formating
+// printf style string formating 2f gives 2 decimal places
 var newStringVarInStringPrintfStyle = f"${deepGupta.name} is ${deepGupta.age} old and weighs ${deepGupta.weigh}%.2f"
+
+
+// %c Character
+// %d Decimal number (integer, base 10)
+// %e Exponential floating-point number
+// %f Floating-point number
+// %i Integer (base 10)
+// %o Octal number (base 8)
+// %s A string of characters
+// %u Unsigned decimal (integer) number
+// %x Hexadecimal number (base 16)
+// %% Print a “percent” character
+// \% Print a “percent” character
+
+// iterating through each character
+val newStringIterateCharacter = newString.map(c => c.toUpper)
+val anotherStringIterateCharacter =  newString.map(_.toUpper)
+for (c <- newString) println(c)
+
+// for / yield function
+
+var newStringIterativeOperation = for{
+    c<-newString
+    if c != 'l'
+} yield c.toUpper
+
+
+
+// self method 
+// Note the function is buggy
+def toLower(c: Char): Char = (c.toByte + 32).toChar
+
+
+// Finding pattern in a string
+val numPattern = "[0-9]+".r
+val address = "123 Forge Way 95014"
+val match1 = numPattern.findFirstIn(address)
+
+// get all patterns
+val matchAll = numPattern.findAllIn(address)
+val matchAllArray = numPattern.findAllIn(address).toArray
+
+// default if no match found 
+val matchWithDefault = numPattern.findFirstIn(address).getOrElse("No Match found")
+
+// replace pattern 
+val replacePatternString = numPattern.replaceFirst(address, "<TAG>")
+val replacePatternStringAll = numPattern.replaceAllIn(address, "<TAG>")
+
+// extract part of strings that match patterns
+val newPattern = "([0-9]+) ([A-Za-z]+)".r
+val newPattern(count, fruit) = "100 Bananas"
